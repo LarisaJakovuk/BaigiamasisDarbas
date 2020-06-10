@@ -24,7 +24,8 @@ namespace BaigiamasisDarbas.Drivers
             ChromeOptions options = new ChromeOptions();
             options.AddArgument("start-maximized");
             options.AddArgument("incognito");
-            
+            options.AddArgument("disable-infobars");
+
             return new ChromeDriver(options);
         }
 

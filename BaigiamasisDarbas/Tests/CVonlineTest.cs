@@ -1,4 +1,7 @@
-﻿using NUnit.Framework;
+﻿using BaigiamasisDarbas.Pages;
+using NUnit.Framework;
+using OpenQA.Selenium;
+using OpenQA.Selenium.Support.UI;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,10 +17,15 @@ namespace BaigiamasisDarbas.Tests
         {
             _cvonlinePage
                 .OpenCvonlinePage()
-
-            .NaujielaiskioLangoUzdarymas();
+                 .Waiting()
+                .ReklamosUzdarymas()
+                .AddAdvertisingConsentCookies()
+           .Waiting()
+                .NaujielaiskioLangoUzdarymas();
             //    .AddAdvertisingConsentCookies()
         }
+
+        
 
     }
 }

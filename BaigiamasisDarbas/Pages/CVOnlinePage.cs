@@ -36,6 +36,12 @@ namespace BaigiamasisDarbas.Pages
 
             return this;
         }
+        public CVOnlinePage Waiting()
+        {
+            Driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(60);
+            //GetWait(100);
+            return this;
+        }
         public CVOnlinePage ReklamosUzdarymas()
         {
             GetWait(5);
@@ -54,10 +60,13 @@ namespace BaigiamasisDarbas.Pages
         }
         public CVOnlinePage NaujielaiskioLangoUzdarymas()
         {
-            WebDriverWait wait = new WebDriverWait(Driver, TimeSpan.FromSeconds(20));
-            wait.Until(ExpectedConditions.VisibilityOfAllElementsLocatedBy(By.ClassName("mailerlite-form-slidebox")));
-           
+            GetWait(50);
+           // WebDriverWait wait = new WebDriverWait(Driver, TimeSpan.FromSeconds(40));
+           //wait.Until(ExpectedConditions.ElementExists(By.ClassName("mailerlite-form-slidebox")));
+
             NaujielaiskioUzdarymoElementas.Click();
+           // Driver.Manage().Cookies.DeleteAllCookies();
+
             return this;
         }
     }
