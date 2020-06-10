@@ -28,6 +28,7 @@ namespace BaigiamasisDarbas.Pages
             return wait;
         }
 
+
         //public DefaultWait<IWebDriver> GetFluentWait()
         //{
         //    DefaultWait<IWebDriver> fluentWait = new DefaultWait<IWebDriver>(Driver);

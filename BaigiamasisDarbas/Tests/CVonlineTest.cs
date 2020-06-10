@@ -16,16 +16,13 @@ namespace BaigiamasisDarbas.Tests
         public static void PirmasTestas()
         {
             _cvonlinePage
-                .OpenCvonlinePage()
-                 .Waiting()
-                .ReklamosUzdarymas()
-                .AddAdvertisingConsentCookies()
-           .Waiting()
-                .NaujielaiskioLangoUzdarymas();
-            //    .AddAdvertisingConsentCookies()
+           .OpenCvonlinePage()
+           .WaitUntilOpenPopUpMailerlite()
+           .AddAdvertisingConsentCookies();
+             // .ReklamosUzdarymas()
         }
-
         
+
 
     }
 }

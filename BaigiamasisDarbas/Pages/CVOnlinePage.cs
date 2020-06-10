@@ -13,7 +13,11 @@ namespace BaigiamasisDarbas.Pages
         //elementai:
         private string pageAdress = "http://cvonline.lt";
         private static IWebElement ReklamosUzdarymoElementas => Driver.FindElement(By.ClassName("close"));
-        private static IWebElement NaujielaiskioUzdarymoElementas => Driver.FindElement(By.ClassName("close-popup.glyphicon.glyphicon-remove"));
+       
+       
+        private static IWebElement NaujielaiskioUzdarymoElementas => Driver.FindElement(By.CssSelector("a[href$='javascript:close()']"));
+        private static IWebElement RegistruotisMygtukas => Driver.FindElement(By.XPath("//a[contains(@href, '/register')]"));
+
         public CVOnlinePage(IWebDriver webdriver) : base(webdriver)
         { }
 
@@ -36,37 +40,31 @@ namespace BaigiamasisDarbas.Pages
 
             return this;
         }
-        public CVOnlinePage Waiting()
+        public CVOnlinePage WaitUntilOpenPopUpMailerlite()
         {
-            Driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(60);
-            //GetWait(100);
+            WebDriverWait wait = new WebDriverWait(Driver, TimeSpan.FromSeconds(100));
+            wait.Until(ExpectedConditions.VisibilityOfAllElementsLocatedBy(By.Id("ml-webforms-popup-295655")));
             return this;
         }
         public CVOnlinePage ReklamosUzdarymas()
         {
-            GetWait(5);
+           
             ReklamosUzdarymoElementas.Click();
             return this;
         }
 
-        public CVOnlinePage DismissAlert()
-        {
-            IAlert alert = Driver.SwitchTo().Alert();
-
-            Console.WriteLine($"Alert says {alert.Text}");
-
-            alert.Dismiss();
-            return this;
-        }
+        
         public CVOnlinePage NaujielaiskioLangoUzdarymas()
         {
-            GetWait(50);
-           // WebDriverWait wait = new WebDriverWait(Driver, TimeSpan.FromSeconds(40));
-           //wait.Until(ExpectedConditions.ElementExists(By.ClassName("mailerlite-form-slidebox")));
-
+            
             NaujielaiskioUzdarymoElementas.Click();
-           // Driver.Manage().Cookies.DeleteAllCookies();
+           
+            return this;
+        }
 
+        public CVOnlinePage PaspaustiMygtukaRegistruotis()
+        {
+            RegistruotisMygtukas.Click();
             return this;
         }
     }
