@@ -57,6 +57,7 @@
   <ItemGroup>
     <Compile Include="Drivers\Browser.cs" />
     <Compile Include="Drivers\CustomDrivers.cs" />
+    <Compile Include="Enums\DarboKategorijos.cs" />
     <Compile Include="Pages\BasePage.cs" />
     <Compile Include="Pages\CVOnlinePage.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
