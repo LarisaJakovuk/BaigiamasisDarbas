@@ -1,26 +1,26 @@
-﻿using BaigiamasisDarbas.Enums;
-using BaigiamasisDarbas.Pages;
-using NUnit.Framework;
-using OpenQA.Selenium;
-using OpenQA.Selenium.Support.UI;
-using System;
+﻿using NUnit.Framework;
+using NUnit.Framework.Internal;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BaigiamasisDarbas.Tests
 {
     class CVonlineTest : BaseTest
     {
-        [TestCase ("Jonas","Jonaitis","j.jonaitis44@gmail.com","866655534", "Informacinės technologijos", true,true,false,TestName ="Visi registravimo laukai uzpildyti")]
-        public static void RegistracijaDarboPaieskai(string vardas, string pavarde, string email,string tel,string darboTipas,bool spam,bool sutikimas,bool infodarbdaviui)
-        {
+        [Order(1)]
+        [TestCase("Jonas",
+            "Jonaitis",
+            "j.jonaitis44@gmail.com",
+            "866655534",
+            "Informacinės technologijos",
+            false,
+            true,
+            true,
+            TestName = "Visi registravimo laukai uzpildyti")]
 
-            _cvonlinePage
-           .OpenCvonlinePage()
-           .WaitUntilOpenPopUpMailerlite()
-           .AddAdvertisingConsentCookies()
+        public static void RegistracijaDarboPaieskai(string vardas, string pavarde, string email, string tel, string darboTipas, bool spam, bool sutikimas, bool infodarbdaviui)
+        {
+            _cvonlinePagrindinisPage
            .PaspaustiMygtukaRegistruotis()
            .WaitUntilOpenRegModal()
            .IvestiVarda(vardas)
@@ -32,63 +32,80 @@ namespace BaigiamasisDarbas.Tests
           .CheckSutikimas(sutikimas)
            .CheckInfoDarbdaviui(infodarbdaviui)
            .PaspaustiSubmit()
-           .PatikrintiArAtsidaroSekmingoRegistravimoLangas();        
+           .PatikrintiSekmingaRegistravima();
         }
+        [Order(2)]
 
+        [TestCase
+            ("Administravimas / Sekretoriavimas",
+            TestName = "Administravimas_Sekretoriavimas")]
+        [TestCase
+            ("Bankai / Draudimas,Energetika ,Farmacija ",
+             TestName = "Bankai_Energetika_Farmacija")]
 
-
-        //Panaudotas testo kodas iš SELENIUM IDE
-        [Test]
-        public void registravimas()
+        [TestCase
+            ("Bankai / Draudimas,Gamyba / Pramonė,Informacinės technologijos",
+             TestName = "Gamyba_Bankai_Draudimas_Informacinės technologijos")]
+        public static void DarboPaieskosRezultatoPatikrinimas(string darbuFiltras)
         {
-            // Test name: registravimas
-            // Step # | name | target | value
-            // 1 | open | / | 
-            _cvonlinePage.OpenCvonlinePage()
-             .WaitUntilOpenPopUpMailerlite()
-           .AddAdvertisingConsentCookies()
-           .PaspaustiMygtukaRegistruotis()
-           .WaitUntilOpenRegModal();
+            // List<string> darbuSarasas = darbuFiltras.Split(',').ToList();
 
-            // 4 | click | id=first_name | 
-            _driver.FindElement(By.Id("first_name")).Click();
-            // 5 | type | id=first_name | Larisa
-            _driver.FindElement(By.Id("first_name")).SendKeys("Larisa");
-            // 6 | click | id=last_name | 
-            _driver.FindElement(By.Id("last_name")).Click();
-            // 7 | type | id=last_name | J
-            _driver.FindElement(By.Id("last_name")).SendKeys("J");
-            // 8 | click | id=desc_seeker_epost | 
-            _driver.FindElement(By.Id("desc_seeker_epost")).Click();
-            // 9 | type | id=desc_seeker_epost | larisa.jakovuk@vpsc.lt
-            _driver.FindElement(By.Id("desc_seeker_epost")).SendKeys("larisa.jakovuk@vpsc.lt");
-            // 10 | click | id=desc_contact_tel | 
-            _driver.FindElement(By.Id("desc_contact_tel")).Click();
-            // 11 | type | id=desc_contact_tel | 866622233
-            _driver.FindElement(By.Id("desc_contact_tel")).SendKeys("866622233");
-            // 12 | click | id=tegvk_id | 
-            _driver.FindElement(By.Id("tegvk_id")).Click();
-            // 13 | select | id=tegvk_id | label=Informacinės technologijos
-            {
-                var dropdown = _driver.FindElement(By.Id("tegvk_id"));
-                dropdown.FindElement(By.XPath("//option[. = 'Informacinės technologijos']")).Click();
-            }
-            // 14 | click | id=tegvk_id | 
-            _driver.FindElement(By.Id("tegvk_id")).Click();
-            // 15 | click | css=.form-group:nth-child(6) .input-check-outer > .text-small | 
-            _driver.FindElement(By.CssSelector(".form-group:nth-child(6) .input-check-outer > .text-small")).Click();
-            // 16 | click | css=.form-group:nth-child(7) .input-check-outer > .text-small | 
-            _driver.FindElement(By.CssSelector(".form-group:nth-child(7) .input-check-outer > .text-small")).Click();
-            // 17 | click | css=.form-group:nth-child(8) .input-check-outer > .text-small | 
-            _driver.FindElement(By.CssSelector(".form-group:nth-child(8) .input-check-outer > .text-small")).Click();
-            // 18 | click | css=.form-group:nth-child(9) .desktop-only | 
-            _driver.FindElement(By.CssSelector(".form-group:nth-child(9) .desktop-only")).Click();
-            // 19 | click | css=.remove-margin-top | 
-            _driver.FindElement(By.CssSelector(".remove-margin-top")).Click();
-            // 20 | assertText | css=.remove-margin-top | Dėkui!
-            Assert.That(_driver.FindElement(By.CssSelector(".remove-margin-top")).Text, Is.EqualTo("Dėkui!"));
+            _cvonlinePagrindinisPage
+           .PasirinktiDarbaPagalFiltra(darbuFiltras)
+           .PatikrintiAtrinktuDarbuSkaciuRezultateZemiauMygtukoIeskoti(_cvonlinePagrindinisPage.pasirinktuDarbuSkaicius);
+
         }
 
+        [Test]
+        public void PrisijungimoAtsijungimoPatikrinimas()
+        {
+            _cvonlinePagrindinisPage
+                .PaspaustiPrisijungti()
+                .SuvestiPrisijungimoDuomenis("larisa.jakovuk@vpsc.lt", "Caule20*20")
+                .PaspaustiZaliaMygtukaPrisijungti()
+                .PatikrintiSekmingoPrisijungimoRezultata()
+                .Atsijungimas()
+                .PatikrintiSekmingoAtsijungimoRezultata()
+            ;
+        }
+        [Test]
+        public void DarboPaieska()
+        {
+            _cvonlinePagrindinisPage.DarboPaieskosPuslapioAtidarymas();
+            _darboPaieskosPage
+                .IvestiNorimaAtlyginimoNuo("1600")
+                .PasirinktiDarboTypa("Informacinės technologijos")
+                .PasirinktiMiesta("Vilnius")
+                .PasirinktiPerioda("24 valandos")
+                .PatikrintiPaieskosFiltruIkelima(4)
+                .PasalintiFiltrus()
+                ;
+
+               
+
+        }
+
+        // KlientuPaslauguPaketuKainuTestas
+        
+            [TestCase(1, 1, 229)]
+            [TestCase(1, 2, 329)]
+            [TestCase(1, 3, 399)]
+            [TestCase(2, 1, 329)]
+            [TestCase(2, 2, 389)]
+            [TestCase(2, 3, 450)]
+
+
+            public void KainuPatikrinimasPagalPasirinktusKriterijus(int periodas, int cvbazesdydis, int kaina)
+            {
+                _cvonlinePagrindinisPage.GoKlientuPage();
+                _klientuPaslauguPaketuKainosPage
+                    .PazymetiPerioda(periodas)
+                    .PazymetiPasirinktaCVBazesDydi(cvbazesdydis)
+                    .PatikrintiKaina(kaina)
+                    ;
+
+            }
+        
 
     }
 }

@@ -59,11 +59,14 @@
     <Compile Include="Drivers\CustomDrivers.cs" />
     <Compile Include="Enums\DarboKategorijos.cs" />
     <Compile Include="Pages\BasePage.cs" />
-    <Compile Include="Pages\CVOnlinePage.cs" />
+    <Compile Include="Pages\CVOnlinePagrindinisPage.cs" />
+    <Compile Include="Pages\DarboPaieskosPage.cs" />
+    <Compile Include="Pages\KlientuPaslauguPaketuKainosPage.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Tests\BaseTest.cs" />
     <Compile Include="Tests\CVonlineTest.cs" />
     <Compile Include="Tools\ErrorScreenShot.cs" />
+    <Compile Include="Tools\SliderioStumimas.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

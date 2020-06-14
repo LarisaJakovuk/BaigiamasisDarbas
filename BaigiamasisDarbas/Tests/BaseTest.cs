@@ -4,7 +4,7 @@ using BaigiamasisDarbas.Tools;
 using NUnit.Framework;
 using NUnit.Framework.Interfaces;
 using OpenQA.Selenium;
-
+using OpenQA.Selenium.Remote;
 
 namespace BaigiamasisDarbas.Tests
 {
@@ -12,14 +12,23 @@ namespace BaigiamasisDarbas.Tests
 
     {
         public static IWebDriver _driver;
-        public static CVOnlinePage _cvonlinePage;
+        public static CVOnlinePagrindinisPage _cvonlinePagrindinisPage;
+        public static DarboPaieskosPage _darboPaieskosPage;
+        public static KlientuPaslauguPaketuKainosPage _klientuPaslauguPaketuKainosPage;
 
         [OneTimeSetUp]
         public static void SetUpChrome()
         {
             _driver = CustomDrivers.GetChromeWithOptions();
-            _cvonlinePage = new CVOnlinePage(_driver);
+            _cvonlinePagrindinisPage = new CVOnlinePagrindinisPage(_driver);
+            _darboPaieskosPage = new DarboPaieskosPage(_driver);
+           _klientuPaslauguPaketuKainosPage = new KlientuPaslauguPaketuKainosPage(_driver);
+
+            _cvonlinePagrindinisPage.OpenCvonlinePage()
+           .WaitUntilOpenPopUpMailerlite()
+           .AddAdvertisingConsentCookies();
         }
+
 
         // vykdomas kaskart po kiekvieno testo
         [TearDown]
@@ -29,6 +38,7 @@ namespace BaigiamasisDarbas.Tests
             {
                 // darom screenshota:
                 ErrorScreenShot.MakePhoto(_driver);
+
             }
         }
 
@@ -36,7 +46,8 @@ namespace BaigiamasisDarbas.Tests
         [OneTimeTearDown]
         public static void CloseBrowser()
         {
-          // _driver.Quit();
+           _driver.Quit();
         }
+
     }
 }

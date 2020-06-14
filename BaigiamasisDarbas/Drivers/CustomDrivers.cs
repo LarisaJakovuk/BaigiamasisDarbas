@@ -14,10 +14,15 @@ namespace BaigiamasisDarbas.Drivers
         }
 
 
-        public static IWebDriver GetFireFoxDriver()
-        {
-            return GetDriver(Browser.FireFox);
-        }
+        //public static IWebDriver GetFireFoxDriver()
+        //{
+        //    FirefoxOptions options = new FirefoxOptions();
+        //    options.AddArgument("--start-maximized");
+        //    options.AddArgument("--incognito");
+        //    options.AddArgument("--disable-infobars");
+        //    return new FirefoxDriver(options);
+
+        //}
 
         public static IWebDriver GetChromeWithOptions()
         {
@@ -36,7 +41,7 @@ namespace BaigiamasisDarbas.Drivers
             switch (browserName)
             {
                 case Browser.FireFox:
-                    webDriver = new FirefoxDriver();
+                    webDriver =new FirefoxDriver();
                     break;
                 case Browser.Chrome:
                     webDriver = GetChromeWithOptions();
