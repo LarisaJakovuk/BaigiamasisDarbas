@@ -1,17 +1,10 @@
-﻿using BaigiamasisDarbas.Enums;
-using BaigiamasisDarbas.Tests;
-using NUnit.Framework;
+﻿using NUnit.Framework;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Interactions;
 using OpenQA.Selenium.Support.UI;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.InteropServices;
-using System.Text;
 using System.Text.RegularExpressions;
-using System.Threading;
-using System.Threading.Tasks;
 
 namespace BaigiamasisDarbas.Pages
 {
@@ -36,16 +29,11 @@ namespace BaigiamasisDarbas.Pages
         private static IWebElement InfoSiuntimasDarbdaviuiCheckBox => Driver.FindElement(By.CssSelector(".form-group:nth-child(8) .input-check-outer"));
         //(By.XPath("//label[contains(.,'Sutinku, kad mano informacija bus išsiųsta darbdaviui')]"));
         private static IWebElement SubmitButton => Driver.FindElement(By.XPath("(//button[@type='submit'])[3]"));
-        private static IWebElement RegModalWindow => Driver.FindElement(By.XPath("//*[@id='register-modal']/div"));
         private static IWebElement SuccessRegisrElement => Driver.FindElement(By.XPath("//h2[contains(.,'Dėkui!')]"));
-        private static IWebElement SuccessModalWindow => Driver.FindElement(By.CssSelector(".remove-margin-top"));
 
         //Elementai paieska inicijuoti pagrindiniame puslapyje
-        private static IWebElement DarboPaieskosMygtukas => Driver.FindElement(By.Id("searchbutton"));
         private static IWebElement DarboTypoIvedimoLaukas => Driver.FindElement(By.CssSelector(".select-large:nth-child(1) .select2-search__field"));
-        private static IWebElement DarboTypoPasirnikimoElementas => Driver.FindElement(By.XPath("//*[@id='lt']/span/span/span"));
-        private static IWebElement MiestoIvedimoLaukas => Driver.FindElement(By.ClassName("select-large select-location-width"));
-        private static IWebElement DarboVietosElementas => Driver.FindElement(By.Id("select2-select-location-results"));
+        
         private static IWebElement DarbuSkaiciusPagalFiltra => Driver.FindElement(By.Id("frontpagecount"));
         public static List<string> PasirinktiDarbai = new List<string>();
         public static List<string> PasirinktiMiestai = new List<string>();
@@ -54,12 +42,10 @@ namespace BaigiamasisDarbas.Pages
 
         //Prisijungimo / Atsijungimo elementai
 
-        private static IWebElement PrisijungimoMygtukas => Driver.FindElement(By.XPath("//*[@id='header-users']/ul[1]/li[1]/a"));
+        private static IWebElement PrisijungimoMygtukas => Driver.FindElement(By.XPath("//*[@id='header-users']/ul[1]/li[1]")); //*[@id="header-users"]/ul[1]/li[1]
         private static IWebElement PrisijungimoVardoLaukas => Driver.FindElement(By.XPath("//input[@name='username']"));
         private static IWebElement SlaptazodzioLaukas => Driver.FindElement(By.XPath("//input[@type='password']"));
         private static IWebElement MygtukasPrisijungtiZalias => Driver.FindElement(By.XPath("//*[@id='passlogin']/form/div[5]/div/button")); 
-        private static IWebElement LoginMessage => Driver.FindElement(By.Id("loginmessage"));
-        private static IWebElement UserLoggedInElement => Driver.FindElement(By.XPath("//*[@id='header-users']/ul[1]/li/a/span"));
 
         private static IWebElement AtsijungimoMygtukas => Driver.FindElement(By.XPath("//*[@id='header-users']/ul[2]/li[1]/a"));
 
@@ -318,6 +304,7 @@ namespace BaigiamasisDarbas.Pages
         }
         public CVOnlinePagrindinisPage PatikrintiSekmingoAtsijungimoRezultata()
         {
+            TimeSpan.FromSeconds(2);
             Assert.That(PrisijungimoMygtukas.Displayed, "Prisijungimo mygtuko nerasta");
             Console.WriteLine($"Atsirado mygtukas:{PrisijungimoMygtukas.Text}");
             return this;

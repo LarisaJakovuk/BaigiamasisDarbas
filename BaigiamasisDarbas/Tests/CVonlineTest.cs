@@ -1,5 +1,6 @@
 ﻿using NUnit.Framework;
 using NUnit.Framework.Internal;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -8,6 +9,7 @@ namespace BaigiamasisDarbas.Tests
     class CVonlineTest : BaseTest
     {
         [Order(1)]
+
         [TestCase("Jonas",
             "Jonaitis",
             "j.jonaitis44@gmail.com",
@@ -35,7 +37,7 @@ namespace BaigiamasisDarbas.Tests
            .PatikrintiSekmingaRegistravima();
         }
         [Order(2)]
-
+        //Darbo paieskos rezultato patikrinimas tituliniame puslapyje
         [TestCase
             ("Administravimas / Sekretoriavimas",
             TestName = "Administravimas_Sekretoriavimas")]
@@ -56,7 +58,9 @@ namespace BaigiamasisDarbas.Tests
 
         }
 
+        [Order(3)]
         [Test]
+        //Prisijungimo atsijungimo registruoto naudotojo funkcijų patikrinimas
         public void PrisijungimoAtsijungimoPatikrinimas()
         {
             _cvonlinePagrindinisPage
@@ -68,44 +72,62 @@ namespace BaigiamasisDarbas.Tests
                 .PatikrintiSekmingoAtsijungimoRezultata()
             ;
         }
+        [Order(4)]
         [Test]
+        //Darbo paieskos filtravimo patikrinimas 
         public void DarboPaieska()
         {
             _cvonlinePagrindinisPage.DarboPaieskosPuslapioAtidarymas();
+           
+            //_darboPaieskosPage
+            //    .ReklamosUzdarymas()
+            //    .IvestiNorimaAtlyginimoNuo("1600")
+            //    .PasirinktiDarboTypa("Informacinės technologijos")
+            //    .PasirinktiMiesta("Vilnius")
+            //    .PasirinktiPerioda("24 valandos")
+            //    .PatikrintiPaieskosFiltruIkelima(4)
+            //    .PasalintiFiltrus()
+            //    ;
             _darboPaieskosPage
-                .IvestiNorimaAtlyginimoNuo("1600")
-                .PasirinktiDarboTypa("Informacinės technologijos")
-                .PasirinktiMiesta("Vilnius")
-                .PasirinktiPerioda("24 valandos")
-                .PatikrintiPaieskosFiltruIkelima(4)
-                .PasalintiFiltrus()
-                ;
-
                
-
+               .IvestiNorimaAtlyginimoNuo("1600")
+               .PasirinktiDarboTypa("Informacinės technologijos")
+               .PasirinktiMiesta("Vilnius")
+               .PasirinktiPerioda("24 valandos")
+               .PatikrintiPaieskosFiltruIkelima(4)
+               .PasalintiFiltrus()
+               ;
         }
 
+        
+
+        [Order(5)]
         // KlientuPaslauguPaketuKainuTestas
-        
-            [TestCase(1, 1, 229)]
-            [TestCase(1, 2, 329)]
-            [TestCase(1, 3, 399)]
-            [TestCase(2, 1, 329)]
-            [TestCase(2, 2, 389)]
-            [TestCase(2, 3, 450)]
 
+        [TestCase(1, 1, 229)]
+        [TestCase(1, 2, 329)]
+        [TestCase(1, 3, 399)]
+        [TestCase(2, 1, 329)]
+        [TestCase(2, 2, 389)]
+        [TestCase(2, 3, 449)]
+        public void KainuPatikrinimasPagalPasirinktusKriterijus(int periodas, int cvbazesdydis, int kaina)
+        {
+            //_cvonlinePagrindinisPage.GoKlientuPage();
+            _klientuPaslauguPaketuKainosPage
+            .OpenKlientuPage()
+                .PazymetiPerioda(periodas)
+                .PazymetiPasirinktaCVBazesDydi(cvbazesdydis)
+                .PatikrintiKaina(kaina)
+                ;
+            //_klientuPaslauguPaketuKainosPage
+            //.OpenKlientuPage()
+            //    .ReklamosUzdarymas()
+            //    .PazymetiPerioda(periodas)
+            //    .PazymetiPasirinktaCVBazesDydi(cvbazesdydis)
+            //    .PatikrintiKaina(kaina)
+            //    ;
+        }
 
-            public void KainuPatikrinimasPagalPasirinktusKriterijus(int periodas, int cvbazesdydis, int kaina)
-            {
-                _cvonlinePagrindinisPage.GoKlientuPage();
-                _klientuPaslauguPaketuKainosPage
-                    .PazymetiPerioda(periodas)
-                    .PazymetiPasirinktaCVBazesDydi(cvbazesdydis)
-                    .PatikrintiKaina(kaina)
-                    ;
-
-            }
-        
 
     }
 }
