@@ -46,7 +46,7 @@ namespace BaigiamasisDarbas.Tests
         [OneTimeTearDown]
         public static void CloseBrowser()
         {
-           //_driver.Quit();
+           _driver.Quit();
         }
 
     }
