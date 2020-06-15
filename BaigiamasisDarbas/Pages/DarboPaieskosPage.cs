@@ -37,6 +37,7 @@ namespace BaigiamasisDarbas.Pages
             wait.Until(ExpectedConditions.VisibilityOfAllElementsLocatedBy(By.XPath("//*[@id='slidecheck']")));
             IWebElement Slider = Driver.FindElement(By.XPath("//*[@id='slidecheck']"));
             SliderioStumimoTool.SliderioStumimas(Driver, Slider, atlyginimas, 3000, 0);
+            TimeSpan.FromSeconds(2);
             return this;
         }
         public DarboPaieskosPage PasirinktiDarboTypa(string pasirinktasDarbas)

@@ -78,25 +78,25 @@ namespace BaigiamasisDarbas.Tests
         public void DarboPaieska()
         {
             _cvonlinePagrindinisPage.DarboPaieskosPuslapioAtidarymas();
-           
-            //_darboPaieskosPage
-            //    .ReklamosUzdarymas()
-            //    .IvestiNorimaAtlyginimoNuo("1600")
-            //    .PasirinktiDarboTypa("Informacinės technologijos")
-            //    .PasirinktiMiesta("Vilnius")
-            //    .PasirinktiPerioda("24 valandos")
-            //    .PatikrintiPaieskosFiltruIkelima(4)
-            //    .PasalintiFiltrus()
-            //    ;
+
             _darboPaieskosPage
-               
-               .IvestiNorimaAtlyginimoNuo("1600")
-               .PasirinktiDarboTypa("Informacinės technologijos")
-               .PasirinktiMiesta("Vilnius")
-               .PasirinktiPerioda("24 valandos")
-               .PatikrintiPaieskosFiltruIkelima(4)
-               .PasalintiFiltrus()
-               ;
+                .ReklamosUzdarymas()
+                .IvestiNorimaAtlyginimoNuo("1600")
+                .PasirinktiDarboTypa("Informacinės technologijos")
+                .PasirinktiMiesta("Vilnius")
+                .PasirinktiPerioda("24 valandos")
+                .PatikrintiPaieskosFiltruIkelima(4)
+                .PasalintiFiltrus()
+                ;
+            //_darboPaieskosPage
+
+            //   .IvestiNorimaAtlyginimoNuo("1600")
+            //   .PasirinktiDarboTypa("Informacinės technologijos")
+            //   .PasirinktiMiesta("Vilnius")
+            //   .PasirinktiPerioda("24 valandos")
+            //   .PatikrintiPaieskosFiltruIkelima(4)
+            //   .PasalintiFiltrus()
+            //   ;
         }
 
         

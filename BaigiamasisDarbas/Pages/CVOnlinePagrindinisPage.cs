@@ -209,8 +209,8 @@ namespace BaigiamasisDarbas.Pages
             IReadOnlyCollection<IWebElement> DarboTypuSarasas = Driver.FindElements(By.XPath("//*[contains(@id,'select2-select-field-result')]"));
 
             string pasirinktasDarbas;
-            int tikSkaicius;
 
+            pasirinktuDarbuSkaicius = 0;
             foreach (var darbotypas in DarboTypuSarasas)
             {
                 //DarboTypoIvedimoLaukas.Click();
