@@ -105,9 +105,9 @@ namespace BaigiamasisDarbas.Pages
 
         public DarboPaieskosPage ReklamosUzdarymas()
         {
-            //WebDriverWait wait = new WebDriverWait(Driver, TimeSpan.FromSeconds(2));
-            //wait.Until(ExpectedConditions.VisibilityOfAllElementsLocatedBy(By.Id("inner-border")));
-            TimeSpan.FromSeconds(2);
+            WebDriverWait wait = new WebDriverWait(Driver, TimeSpan.FromSeconds(5));
+            wait.Until(ExpectedConditions.VisibilityOfAllElementsLocatedBy(By.Id("inner-border")));
+            //TimeSpan.FromSeconds(2);
             if (ReklamosLangas.Displayed)
                 kryziukas.Click();
             return this;

@@ -294,7 +294,7 @@ namespace BaigiamasisDarbas.Pages
             IWebElement useris = Driver.FindElement(By.XPath("//*[@id='header-users']/ul[1]/li/a/span"));
             
             Assert.That(AtsijungimoMygtukas.Displayed, "Atsijungimo mygtuko nerasta");
-            Console.WriteLine($"Prisijunge:{useris.Text}");
+            Console.WriteLine($"Sekmingai prisijunge:  {useris.Text}");
             return this;
         }
         public CVOnlinePagrindinisPage Atsijungimas()
@@ -304,9 +304,10 @@ namespace BaigiamasisDarbas.Pages
         }
         public CVOnlinePagrindinisPage PatikrintiSekmingoAtsijungimoRezultata()
         {
-            TimeSpan.FromSeconds(2);
+            WebDriverWait wait = new WebDriverWait(Driver, TimeSpan.FromSeconds(100));
+            wait.Until(ExpectedConditions.VisibilityOfAllElementsLocatedBy(By.XPath("//*[@id='header-users']/ul[1]/li[1]")));
             Assert.That(PrisijungimoMygtukas.Displayed, "Prisijungimo mygtuko nerasta");
-            Console.WriteLine($"Atsirado mygtukas:{PrisijungimoMygtukas.Text}");
+            Console.WriteLine($"Jus.Atsijunget. Atsirado mygtukas:{PrisijungimoMygtukas.Text}");
             return this;
         }
         public DarboPaieskosPage DarboPaieskosPuslapioAtidarymas()
